@@ -61,7 +61,7 @@ function calcWithTimeout() {
 }
 
 function calcWithPromise() {
-    if (counterPromise < 1000000) {
+    if (counterPromise < 1000) {
         counterPromise++;
         Promise.resolve().then(calcWithPromise);
     } else {
@@ -69,14 +69,14 @@ function calcWithPromise() {
     }
 }
 
-console.time('Promise');
-calcWithPromise();
+// console.time('Promise');
+// calcWithPromise();
 
 console.time('setTimeout');
 calcWithTimeout();
 
-console.time('RAF');
-calcWithRAF();
+// console.time('RAF');
+// calcWithRAF();
 
-document.addEventListener('DOMContentLoaded', () => {
-}, false);
+// document.addEventListener('DOMContentLoaded', () => {
+// }, false);
