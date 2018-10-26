@@ -25,25 +25,51 @@ function animateWithTimeout() {
     }
 }
 
-function animateWithPromise() {
-    if (threeTop < 1000) {
-        Promise.resolve().then(animateWithPromise);
-        three.style.marginLeft = threeTop + 'px';
-        threeTop += threeStep;
-    }
+// function animateWithPromise() {
+//     if (threeTop < 1000) {
+//         Promise.resolve().then(animateWithPromise);
+//         three.style.marginLeft = threeTop + 'px';
+//         threeTop += threeStep;
+//     }
+// }
+
+// function animateWithTimeout2() {
+//     for (let i = 0; i < 1000; i++) {
+//         const newTop = threeTop;
+//         setTimeout(function() {
+//             three.style.marginLeft = newTop + 'px';
+//             console.log(newTop);
+//         }, 0);
+//         threeTop += threeStep;
+//     }
+// }
+
+function animateWithInterval() {
+    const interval = setInterval(function() {
+        if (threeTop < 1000) {
+            const newTop = threeTop;
+            threeTop += threeStep;
+            three.style.marginLeft = newTop + 'px';
+        } else {
+            clearInterval(interval);
+        }
+    }, 0);
 }
 
 
-//animateWithRAF();
-//animateWithTimeout();
-//animateWithPromise();
+animateWithRAF();
+animateWithTimeout();
+// animateWithTimeout2();
+animateWithInterval();
+// animateWithPromise();
 
 let counterRAF = 0;
 let counterTimeout = 0;
 let counterPromise = 0;
 
 function calcWithRAF() {
-    if (counterRAF < 1000) {
+    if (counterRAF < 60) {
+        console.log('RAF: ' + counterRAF);
         counterRAF++;
         requestAnimationFrame(calcWithRAF);
     } else {
@@ -52,7 +78,8 @@ function calcWithRAF() {
 }
 
 function calcWithTimeout() {
-    if (counterTimeout < 1000) {
+    if (counterTimeout < 60) {
+        console.log('Timeout: ' + counterTimeout);
         counterTimeout++;
         setTimeout(calcWithTimeout, 0);
     } else {
@@ -61,7 +88,8 @@ function calcWithTimeout() {
 }
 
 function calcWithPromise() {
-    if (counterPromise < 1000) {
+    if (counterPromise < 60) {
+        console.log('Promise: ' + counterPromise);
         counterPromise++;
         Promise.resolve().then(calcWithPromise);
     } else {
@@ -69,14 +97,14 @@ function calcWithPromise() {
     }
 }
 
-// console.time('Promise');
-// calcWithPromise();
-
-console.time('setTimeout');
-calcWithTimeout();
-
+// console.time('setTimeout');
+// setTimeout(calcWithTimeout);
+//
 // console.time('RAF');
-// calcWithRAF();
+// requestAnimationFrame(calcWithRAF);
+//
+// console.time('Promise');
+// Promise.resolve().then(calcWithPromise);
 
 // document.addEventListener('DOMContentLoaded', () => {
 // }, false);
