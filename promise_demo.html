@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Promise Demo</title>
+</head>
+<body>
+<div>
+    <img src="giphy.webp" alt="baboon GIF" style="width: 480px; height: 360px; left: 20px; top: 20px;">
+    <br/>
+    <br/>
+    <br/>
+    <button id="start">Start</button>
+    <br/>
+    <button id="stop">Stop</button>
+</div>
+
+<script type="text/javascript">
+    let run = true;
+    const start = document.getElementById('start');
+    const stop = document.getElementById('stop');
+    start.addEventListener('click', () => {
+        Promise.resolve().then(promiseCallback);
+    });
+    stop.addEventListener('click', () => {
+        run = false;
+    });
+
+    function promiseCallback() {
+        if (run) {
+            Promise.resolve().then(promiseCallback);
+        }
+    }
+</script>
+</body>
+</html>
