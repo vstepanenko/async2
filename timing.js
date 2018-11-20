@@ -3,7 +3,7 @@ let counterTimeout = 0;
 let counterPromise = 0;
 
 function calcWithRAF() {
-    if (counterRAF < 30) {
+    if (counterRAF < 60) {
         console.log('animationFrame: ' + counterRAF);
         counterRAF++;
         requestAnimationFrame(calcWithRAF);
@@ -13,7 +13,7 @@ function calcWithRAF() {
 }
 
 function calcWithTimeout() {
-    if (counterTimeout < 30) {
+    if (counterTimeout < 60) {
         console.log('Timeout: ' + counterTimeout);
         counterTimeout++;
         setTimeout(calcWithTimeout, 0);
@@ -23,7 +23,7 @@ function calcWithTimeout() {
 }
 
 function calcWithPromise() {
-    if (counterPromise < 30) {
+    if (counterPromise < 60) {
         console.log('Promise: ' + counterPromise);
         counterPromise++;
         Promise.resolve().then(calcWithPromise);

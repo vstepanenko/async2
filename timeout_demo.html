@@ -5,18 +5,41 @@
     <title>Timeout Demo</title>
 </head>
 <body>
-<div>
-    <img src="monkey.gif" alt="baboon GIF" style="width: 480px; height: 360px; left: 20px; top: 20px;">
-    <br/>
-    <br/>
-    <br/>
-    <button id="start">Start</button>
-    <br/>
-    <button id="stop">Stop</button>
+<div style="font-size: 30px; padding: 30px;">
+    <div style="position: relative; width: 100%; height: 140px;">
+        <div id="box" style="position: absolute; width: 100px; height: 100px; background-color: blue; margin-left: 0;"></div>
+    </div>
+    <div>
+        <p><b id="counter">0</b></p>
+        <p>
+            JavaScript is always synchronous and single-threaded. If you're executing a JavaScript block of code on a page then no other JavaScript on that page will currently be executed. JavaScript is only asynchronous in the sense that it can make, for example, Ajax calls.
+        </p>
+        <p>
+            Synchronous programming means that, barring conditionals and function calls, code is executed sequentially from top-to-bottom, blocking on long-running tasks such as network requests and disk I/O. Asynchronous programming means that the engine runs in an event loop.
+        </p>
+    </div>
+    <button id="start" style="margin: 10px; font-size: 40px;">Start</button>
+    <button id="stop" style="margin: 10px; font-size: 40px;">Stop</button>
 </div>
 
 <script type="text/javascript">
+    const box = document.getElementById('box');
+    let margin = 0;
+
+    function animateWithTimeout() {
+        if (margin == 1000) {
+            margin = 0;
+        }
+        margin++;
+        setTimeout(animateWithTimeout, 0);
+        box.style.marginLeft = margin + 'px';
+
+    }
+    animateWithTimeout();
+
     let run = true;
+    let counter = 0;
+    const counterBox = document.getElementById('counter');
     const start = document.getElementById('start');
     const stop = document.getElementById('stop');
     start.addEventListener('click', () => {
@@ -28,6 +51,8 @@
 
     function setTimeoutCallback() {
         if (run) {
+            counter++;
+            counterBox.innerText = counter;
             setTimeout(setTimeoutCallback, 0);
         }
     }
